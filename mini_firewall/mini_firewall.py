@@ -22,13 +22,11 @@ def read_ip_file(filename):
 
 
 def is_nimda_worm(packet):
-    # if packet.haslayer(TCP) and packet[TCP].dport == 80:
-    #     payload = packet[TCP].payload
-    #     return "GET /scripts/root.exe HTTP/1.0\r\nHost: example.com\r\n\r\n" in str(payload)
-    # return False
-    if packet.haslayer(Raw):
-        return b"/scripts/root.exe" in bytes(packet[Raw].load)
+    if packet.haslayer(TCP) and packet[TCP].dport == 80:
+        payload = packet[TCP].payload
+        return "GET /scripts/root.exe" in str(payload)
     return False
+    
 
 def log_event(message):
     log_folders = "logs"

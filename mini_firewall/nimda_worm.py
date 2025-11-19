@@ -1,6 +1,10 @@
 from scapy.all import IP, TCP, Raw, send
 
-def send_nimda_packet(target_ip, target_port = 80, src_ip = "", src_port = 12345):
+
+TARGET_IP = "192.168.3.252"  #target ip
+SRC_IP = "192.168.3.130" #your ip
+
+def send_nimda_packet(target_ip, src_ip, target_port = 80 , src_port = 12345):
     packet = (
         IP(src = src_ip, dst = target_ip)
         / TCP(sport = src_port, dport = target_port)
@@ -10,5 +14,4 @@ def send_nimda_packet(target_ip, target_port = 80, src_ip = "", src_port = 12345
     
 
 if __name__ == "__main__":
-    target_ip = "192.168.3.252"
-    send_nimda_packet(target_ip)
+    send_nimda_packet(TARGET_IP, SRC_IP)
